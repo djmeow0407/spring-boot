@@ -20,22 +20,24 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+          args:
+            - "--server.address=0.0.0.0"
           resources:
             requests:
               cpu: "500m"
               memory: "512Mi"
             limits:
               cpu: "1000m"
-              memory: "1024Mi"
+              memory: "1500Mi"
           livenessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10
+            initialDelaySeconds: 40
+            periodSeconds: 20
           readinessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
-            initialDelaySeconds: 3
-            periodSeconds: 5
+            initialDelaySeconds: 40
+            periodSeconds: 20
